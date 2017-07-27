@@ -18,7 +18,18 @@ const store = createStore(counter);
 
 const render = () => {
     ReactDOM.render(
-        <Counter value={ store.getState() } />,
+        <Counter value={ store.getState() }
+                 onIncrement={() =>
+                    store.dispatch({
+                        type: "INCREMENT"
+                    })
+                 }
+                 onDecrement={() =>
+                    store.dispatch({
+                        type: "DECREMENT"
+                    })
+                 }
+        />,
         document.getElementById('main')
     );
 
@@ -26,7 +37,3 @@ const render = () => {
 
 store.subscribe(render);
 render();
-
-document.addEventListener('click', () => {
-   store.dispatch({type: 'INCREMENT'});
-});

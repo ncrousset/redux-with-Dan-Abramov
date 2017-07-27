@@ -10278,15 +10278,22 @@ var counter = function counter() {
 var store = (0, _redux.createStore)(counter);
 
 var render = function render() {
-    _reactDom2.default.render(_react2.default.createElement(_counter2.default, { value: store.getState() }), document.getElementById('main'));
+    _reactDom2.default.render(_react2.default.createElement(_counter2.default, { value: store.getState(),
+        onIncrement: function onIncrement() {
+            return store.dispatch({
+                type: "INCREMENT"
+            });
+        },
+        onDecrement: function onDecrement() {
+            return store.dispatch({
+                type: "DECREMENT"
+            });
+        }
+    }), document.getElementById('main'));
 };
 
 store.subscribe(render);
 render();
-
-document.addEventListener('click', function () {
-    store.dispatch({ type: 'INCREMENT' });
-});
 
 /***/ }),
 /* 88 */
@@ -23548,7 +23555,25 @@ var Counter = function (_React$Component) {
     _createClass(Counter, [{
         key: 'render',
         value: function render() {
-            return _react2.default.DOM.h1('', '' + this.props.value);
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    this.props.value
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.props.onIncrement },
+                    '+'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.props.onDecrement },
+                    '-'
+                )
+            );
         }
     }]);
 
